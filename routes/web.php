@@ -16,10 +16,4 @@ Route::get('/loai-san-pham', [PageController::class, 'getLoaiSp'])->name('loaisa
 Route::get('/chi-tiet-san-pham', [PageController::class, 'getChiTietSp']);
 Route::get('/lien-he', [PageController::class, 'getLienHe'])->name('lienhe');
 Route::get('/gioi-thieu', [PageController::class, 'getGioiThieu'])->name('gioithieu');
-
-
-
-
-
-
-
+Route::get('/chi-tiet/{id}', [PageController::class, 'getDetail'])->name('chitiet');
