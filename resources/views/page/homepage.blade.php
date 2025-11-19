@@ -59,8 +59,8 @@
                                                 </div>
                                             @endif
                                             <div class="single-item-header">
-                                                <a href="product.html"><img src="source/image/product/{{ $new->image }}"
-                                                        alt=""></a>
+                                                <a href="detail/{{ $new->id }}"><img width="200" height="200"
+                                                        src="source/image/product/{{ $new->image }}" alt=""></a>
                                             </div>
                                             <div class="single-item-body">
                                                 <p class="single-item-title">{{ $new->name }}</p>
@@ -118,8 +118,9 @@
                                         <div class="single-item">
 
                                             <div class="single-item-header">
-                                                <a href="product.html">
-                                                    <img src="source/image/product/{{ $spkm->image }}" alt="">
+                                                <a href="detail/{{ $spkm->id }}">
+                                                    <img width="200" height="200"
+                                                        src="source/image/product/{{ $spkm->image }}" alt="">
                                                 </a>
                                                 @if ($spkm->promotion_price > 0)
                                                     <div class="ribbon-wrapper">

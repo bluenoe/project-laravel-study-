@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Slide;
 use App\Models\Product;
+use App\Models\Comment;
+
 
 class PageController extends Controller
 {
@@ -22,13 +24,22 @@ class PageController extends Controller
 
     public function getDetail(Request $request)
     {
-        $product = Product::where('id', $request->id)->first();
-        $related_products = Product::where('id_type', $product->id_type)
-            ->where('id', '<>', $product->id)
+        $sanpham = Product::where('id', $request->id)->first();
+        $splienquan = Product::where('id_type', $sanpham->id_type)
+            ->where('id', '<>', $sanpham->id)
             ->paginate(3);
-        $comment = Comment::where('id_product', $request->id)->get();
-        return view('page.product_detail', compact('product', 'related_products', 'comment'));
+
+        $comments = Comment::where('id_product', $request->id)->get();
+
+        return view('page.product_detail', compact('sanpham', 'splienquan', 'comments'));
     }
+
+    public function getAddToCart($id)
+    {
+        return "Đã thêm sản phẩm $id vào giỏ (demo).";
+    }
+
+
 
     public function getLoaiSp()
     {
