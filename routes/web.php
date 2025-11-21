@@ -8,15 +8,24 @@ Route::get('/', function () {
 });
 
 
-// Trang chủ dùng PageController@getIndex
-Route::get('/trangchu', [PageController::class, 'getIndex'])->name('trangchu');
+// Trang chủ dùng PageController@getIndex (cũ)
+// Trang chủ
 
-// Các route khác giữ nguyên
-Route::get('/loai-san-pham', [PageController::class, 'getLoaiSp'])->name('loaisanpham');
-Route::get('/chi-tiet-san-pham', [PageController::class, 'getChiTietSp']);
-Route::get('/lien-he', [PageController::class, 'getLienHe'])->name('lienhe');
-Route::get('/gioi-thieu', [PageController::class, 'getGioiThieu'])->name('gioithieu');
-Route::get('/detail/{id}', [PageController::class, 'getDetail'])->name('detail');
+Route::get('/trang-chu', [PageController::class, 'index'])->name('home');
 
-Route::get('add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('themgiohang');
+// Loại sản phẩm
+Route::get('/loai-san-pham/{id}', [PageController::class, 'showCategory'])->name('category.show');
+
+// Chi tiết sản phẩm
+Route::get('/san-pham/{id}', [PageController::class, 'show'])->name('product.show');
+
+// Liên hệ
+Route::get('/lien-he', [PageController::class, 'contact'])->name('contact');
+
+// Giới thiệu
+Route::get('/gioi-thieu', [PageController::class, 'about'])->name('about');
+
+// Thêm giỏ hàng
+Route::get('/gio-hang/them/{id}', [PageController::class, 'addToCart'])->name('cart.add');
+
 

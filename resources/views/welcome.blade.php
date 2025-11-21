@@ -253,7 +253,7 @@
 
             <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-2">
                 <!-- Nút Enter the App -->
-                <form action="{{ url('/trangchu') }}" method="get">
+                <form action="{{ url('/trang-chu') }}" method="get">
                     <button type="submit" class="enter-btn" id="enterBtn">
                         <span class="label-main">Enter the app</span>
                         <span class="label-sub d-none d-md-inline">Go to your main page</span>

@@ -7,59 +7,71 @@ use App\Models\Slide;
 use App\Models\Product;
 use App\Models\Comment;
 
-
 class PageController extends Controller
 {
-    public function getIndex()
+    /**
+     * Trang chủ
+     */
+    public function index()
     {
-        $slide = Slide::all();
+        $slides = Slide::all();
 
-        $new_product = Product::where('new', 1)
+        $newProducts = Product::where('new', 1)
             ->paginate(4, ['*'], 'new-page');
-        $top_products = Product::where('promotion_price', '<>', 0)
+
+        $topProducts = Product::where('promotion_price', '<>', 0)
             ->paginate(4, ['*'], 'top-page');
 
-        return view('page.homepage', compact('slide', 'new_product', 'top_products'));
+        return view('page.homepage', compact('slides', 'newProducts', 'topProducts'));
     }
 
-    public function getDetail(Request $request)
+    /**
+     * Chi tiết sản phẩm
+     */
+    public function show($id)
     {
-        $product = Product::where('id', $request->id)->first();
+        $product = Product::findOrFail($id);
 
-        // Get related products (same category/type but different ID)
+        // Sản phẩm liên quan (cùng loại)
         $relatedProducts = Product::where('id_type', $product->id_type)
             ->where('id', '<>', $product->id)
             ->paginate(3);
 
-        $comments = Comment::where('id_product', $request->id)->get();
+        // Comment của sản phẩm
+        $comments = Comment::where('id_product', $id)->get();
 
         return view('page.product_detail', compact('product', 'relatedProducts', 'comments'));
     }
 
+    /**
+     * Loại sản phẩm (Category)
+     */
+    public function showCategory($id)
+    {
+        // Lúc sau nếu bà muốn query theo category thì tui chỉnh tiếp
+        return view('page.product'); 
+    }
 
-    public function getAddToCart($id)
+    /**
+     * Thêm giỏ hàng
+     */
+    public function addToCart($id)
     {
         return "Đã thêm sản phẩm $id vào giỏ (demo).";
     }
 
-
-
-    public function getLoaiSp()
-    {
-        return view('page.product');
-    }
-
-    public function getChiTietSp()
-    {
-        return view('page.product_detail');
-    }
-
-    public function getLienHe()
+    /**
+     * Liên hệ
+     */
+    public function contact()
     {
         return view('page.contact');
     }
 
-    public function getGioiThieu()
+    /**
+     * Giới thiệu
+     */
+    public function about()
     {
         return view('page.about');
     }
