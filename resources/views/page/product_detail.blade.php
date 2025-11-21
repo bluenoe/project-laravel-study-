@@ -4,11 +4,11 @@
     <div class="inner-header">
         <div class="container">
             <div class="pull-left">
-                <h6 class="inner-title">Sản Phẩm {{ $sanpham->name }}</h6>
+                <h6 class="inner-title">Sản Phẩm {{ $product->name }}</h6>
             </div>
             <div class="pull-right">
                 <div class="beta-breadcrumb font-large">
-                    <a href="/trangchu">Home</a> / <span>Details</span>
+                    <a href="{{ route('home') }}">Home</a> / <span>Details</span>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -25,7 +25,7 @@
                     <div class="row">
                         {{-- IMAGE --}}
                         <div class="col-sm-4">
-                            <img src="/source/image/product/{{ $sanpham->image }}" alt="">
+                            <img src="/source/image/product/{{ $product->image }}" alt="">
                         </div>
 
                         {{-- PRODUCT DETAIL --}}
@@ -34,27 +34,27 @@
 
                                 {{-- TITLE --}}
                                 <p class="single-item-title">
-                                <h2>{{ $sanpham->name }}</h2>
+                                <h2>{{ $product->name }}</h2>
                                 </p>
 
                                 {{-- PRICE --}}
                                 <p class="single-item-price" style="text-align:left; font-size: 15px;">
 
-                                    @if ($sanpham->promotion_price == 0)
+                                    @if ($product->promotion_price == 0)
                                         {{-- Giá bình thường --}}
                                         <span style="color:#222; font-weight:600; font-size:16px;">
-                                            {{ number_format($sanpham->unit_price) }} Đồng
+                                            {{ number_format($product->unit_price) }} Đồng
                                         </span>
                                     @else
                                         {{-- Giá gốc --}}
                                         <span
                                             style="text-decoration:line-through; color:#888; font-size:14px; margin-right:6px;">
-                                            {{ number_format($sanpham->unit_price) }} Đồng
+                                            {{ number_format($product->unit_price) }} Đồng
                                         </span>
 
                                         {{-- Giá giảm --}}
                                         <span style="color:#e63946; font-weight:600; font-size:16px;">
-                                            {{ number_format($sanpham->promotion_price) }} Đồng
+                                            {{ number_format($product->promotion_price) }} Đồng
                                         </span>
                                     @endif
 
@@ -67,7 +67,7 @@
 
                             {{-- DESCRIPTION --}}
                             <div class="single-item-desc">
-                                {!! $sanpham->description !!}
+                                {!! $product->description !!}
                             </div>
 
                             <div class="space20">&nbsp;</div>
@@ -85,7 +85,7 @@
                                 </select>
 
                                 {{-- ADD TO CART --}}
-                                <a class="add-to-cart" href="{{ route('themgiohang', $sanpham->id) }}">
+                                <a class="add-to-cart" href="{{ route('cart.add', $product->id) }}">
                                     <i class="fa fa-shopping-cart"></i>
                                 </a>
 
@@ -116,8 +116,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
 
-                                        <div class="card-body">
-                                            <form method="post" action="/comment/{{ $sanpham->id }}">
+                                    <div class="card-body">
+                                            <form method="post" action="/comment/{{ $product->id }}">
                                                 @csrf
                                                 <div class="form-group">
                                                     <textarea class="form-control" name="comment" required></textarea>
@@ -131,17 +131,15 @@
                             </div>
 
                             {{-- SHOW COMMENTS --}}
-                            @if (isset($comments))
-                                @foreach ($comments as $comment)
-                                    <p class="border-bottom">
-                                        <b class="pull-left">{{ $comment->username }}</b><br>
-                                        {{ $comment->comment }}
-                                    </p>
-                                    <br>
-                                @endforeach
-                            @else
+                            @forelse ($comments as $comment)
+                                <p class="border-bottom">
+                                    <b class="pull-left">{{ $comment->username }}</b><br>
+                                    {{ $comment->comment }}
+                                </p>
+                                <br>
+                            @empty
                                 <p>Chưa có bình luận nào cả!</p>
-                            @endif
+                            @endforelse
 
                         </div>
                     </div>
@@ -153,13 +151,13 @@
                         <h4>Related Products</h4>
 
                         <div class="row">
-                            @foreach ($splienquan as $sp)
+                            @foreach ($relatedProducts as $sp)
                                 <div class="col-sm-4">
                                     <div class="single-item">
 
                                         {{-- IMAGE --}}
                                         <div class="single-item-header">
-                                            <a href="detail/{{ $sp->id }}">
+                                            <a href="{{ route('product.show', $sp->id) }}">
                                                 <img src="/source/image/product/{{ $sp->image }}" alt="">
                                             </a>
                                             @if ($sp->promotion_price != 0)
@@ -199,11 +197,11 @@
 
                                         {{-- ACTION --}}
                                         <div class="single-item-caption">
-                                            <a class="add-to-cart pull-left" href="{{ route('themgiohang', $sp->id) }}">
+                                            <a class="add-to-cart pull-left" href="{{ route('cart.add', $sp->id) }}">
                                                 <i class="fa fa-shopping-cart"></i>
                                             </a>
 
-                                            <a class="beta-btn primary" href="detail/{{ $sp->id }}">
+                                            <a class="beta-btn primary" href="{{ route('product.show', $sp->id) }}">
                                                 Details <i class="fa fa-chevron-right"></i>
                                             </a>
                                             <div class="clearfix"></div>

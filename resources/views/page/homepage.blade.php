@@ -59,7 +59,7 @@
                                                 </div>
                                             @endif
                                             <div class="single-item-header">
-                                                <a href="detail/{{ $new->id }}"><img width="200" height="200"
+                                                <a href="{{ route('product.show', $new->id) }}"><img width="200" height="200"
                                                         src="source/image/product/{{ $new->image }}" alt=""></a>
                                             </div>
                                             <div class="single-item-body">
@@ -118,7 +118,7 @@
                                         <div class="single-item">
 
                                             <div class="single-item-header">
-                                                <a href="detail/{{ $spkm->id }}">
+                                                <a href="{{ route('product.show', $spkm->id) }}">
                                                     <img width="200" height="200"
                                                         src="source/image/product/{{ $spkm->image }}" alt="">
                                                 </a>
