@@ -9,7 +9,7 @@ class Slide extends Model
 {
     use HasFactory;
 
-    protected $table = 'slide'; // Khi muốn chắc chắn
+    protected $table = 'slide'; // Tên bảng trong SQL
 
     protected $fillable = [
         'title',

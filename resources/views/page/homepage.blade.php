@@ -6,7 +6,7 @@
                 <div class="banner">
                     <ul>
                         <!-- THE FIRST SLIDE -->
-                        @foreach ($slide as $sl)
+                        @foreach ($slides as $sl)
                             <li data-transition="boxfade" data-slotamount="20" class="active-revslide"
                                 style="width: 100%; height: 100%; overflow: hidden;">
                                 <div class="slotholder" style="width: 100%; height: 100%;">
@@ -45,12 +45,12 @@
                         <div class="beta-products-list">
                             <h4>New Products</h4>
                             <div class="beta-products-details">
-                                <p class="pull-left">{{ $new_product->total() }} styles found</p>
+                                <p class="pull-left">{{ $newProducts->total() }} styles found</p>
                                 <div class="clearfix"></div>
                             </div>
 
                             <div class="row">
-                                @foreach ($new_product as $new)
+                                @foreach ($newProducts as $new)
                                     <div class="col-sm-3">
                                         <div class="single-item">
                                             @if ($new->promotion_price != 0)
@@ -98,7 +98,7 @@
                             </div>
                             <!-- Pagination -->
                             <div class="col-sm-12 text-left">
-                                {!! $new_product->links('pagination::bootstrap-4') !!}
+                                {!! $newProducts->links('pagination::bootstrap-4') !!}
                             </div>
                         </div> <!-- .beta-products-list -->
 
