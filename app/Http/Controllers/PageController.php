@@ -46,9 +46,8 @@ class PageController extends Controller
     /**
      * Loại sản phẩm (Category)
      */
-    public function showCategory($id)
+    public function showCategory()
     {
-        // Lúc sau nếu bà muốn query theo category thì tui chỉnh tiếp
         return view('page.product'); 
     }
 
